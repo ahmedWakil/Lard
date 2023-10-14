@@ -54,7 +54,8 @@ Coordinate
 Cut
 Debate
 Decide
-Eat	Eating
+Eat
+Eating
 Encourage
 Earn
 Expect

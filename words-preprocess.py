@@ -46,9 +46,11 @@ def main():
 
     ## then get the file names that are in data
     (data, catagories) = loadData(DATA, IGNORE)
-    ## add the words to the proper entries in the word.json file
+    ## add the words to the proper entries in the word.json file, you can
+    ## take care of duplicates buy combining them into sets and then adding them
     for k in list(words.keys()):
-        words[k].extend(data[k])
+        combined = set(words[k] + data[k])
+        words[k] = list(combined)
     ## write the word.json file
     with open(WORDS_PATH, 'w', encoding='utf-8') as f:
         json.dump(words, f, ensure_ascii=False, indent=4)
