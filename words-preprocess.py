@@ -5,7 +5,9 @@ import json
 
 ## Takes in a file name or a url to the file and then adds them to the
 ## words data file to be used in the generation
-DATA_FILEPATH = "/Data"
+IGNORE = {'\r', '\n'}
+DATA = "Data/*.txt"
+WORDS_PATH = "Data/words.json"
 
 def findFiles(path):
     return glob.glob(path)
@@ -22,7 +24,7 @@ def readLines(filepath, ignore: set = {}):
 
     return lines
 
-## procedure for loading the data from the data folder 
+## procedure for loading the data from the data folder
 def loadData(path, ignore: set = {}):
     data = {}
     all_catagories = []
@@ -42,17 +44,15 @@ def main():
     with open('Data/words.json', 'r', encoding='utf-8') as f:
         words = json.load(f)
 
-    print(words)
-
     ## then get the file names that are in data
-
-
-    ## create a dictionary with the keys as the file names and the words
-    ## in the file as the entries to a list which will be the value of the key
-
+    (data, catagories) = loadData(DATA, IGNORE)
     ## add the words to the proper entries in the word.json file
-
+    for k in list(words.keys()):
+        words[k].extend(data[k])
     ## write the word.json file
+    with open(WORDS_PATH, 'w', encoding='utf-8') as f:
+        json.dump(words, f, ensure_ascii=False, indent=4)
 
+    print(". . . Success")
 if __name__ == "__main__":
     main()

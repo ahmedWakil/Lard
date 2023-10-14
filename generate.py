@@ -1,3 +1,5 @@
+import json
+
 def Sentence():
     return NounPhrase() + VerbPhrase()
 
@@ -39,3 +41,9 @@ def ModifyingAdverb():
 
 def Adverb():
     pass
+
+def main():
+    print("hello")
+
+if __name__ == "__main__":
+    main()

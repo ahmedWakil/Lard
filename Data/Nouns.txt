@@ -12,8 +12,6 @@ toys
 toy
 boot
 boots
-strech
-streches
 bear
 beers
 back
