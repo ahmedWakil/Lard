@@ -1,49 +1,62 @@
 import json
 
+def getData(wordType: str):
+    ## read the words json file and then return the word list with that word type
+    with open('Data/words.json', 'r', encoding='utf-8') as f:
+        words = json.load(f)
+
+    return words[wordType]
+
 def Sentence():
-    return NounPhrase() + VerbPhrase()
+    sentence =  f"{NounPhrase()} {VerbPhrase()}"
+    sentence[0] = sentence[0].upper()
+    return sentence
 
 def NounPhrase():
-    return Determinants() + AdjecivePhrase() + Noun() + PrepositionalPhrase()
+    return f"{Determinants()} {AdjecivePhrase()} {Noun()} {PrepositionalPhrase()}"
 
 def VerbPhrase():
-    return AuxiliaryVerb() + Verb() + NounPhrase() + PrepositionalPhrase() + AdverbialPhrase()
+    return f"{AuxiliaryVerb()} {Verb()} {NounPhrase()} {PrepositionalPhrase()} {AdverbialPhrase()}"
 
+# optional can return an empty string
 def AdjecivePhrase():
-    return AdverbialPhrase() + Adjective()
+    return f"{AdverbialPhrase()} {Adjective()}"
 
+# optional can return an empty string
 def PrepositionalPhrase():
-    return Preposition() + NounPhrase()
+    return f"{Preposition()} {NounPhrase()}"
 
 def AdverbialPhrase():
-    return ModifyingAdverb() + Adverb()
+    return f"{ModifyingAdverb()} {Adverb()}"
 
+## optional can return an empty string
 def Determinants():
-    pass
+    determinants = getData("Determinants")
 
 def Noun():
-    pass
+    nouns = getData("Nouns")
 
 def AuxiliaryVerb():
-    pass
+    auxverbs = getData("AuxiliaryVerb")
 
 def Verb():
-    pass
+    verbs = getData("Verb")
 
 def Adjective():
-    pass
+    adj = getData("Adjective")
 
 def Preposition():
-    pass
+    preposition = getData("Preposition")
 
 def ModifyingAdverb():
-    pass
+    modifyingAdverb = getData("ModifyingAdverb")
 
 def Adverb():
-    pass
+    adverb = getData("Adverb")
 
 def main():
-    print("hello")
+    ## here we will be generating the sentences
+    print("Hello world")
 
 if __name__ == "__main__":
     main()

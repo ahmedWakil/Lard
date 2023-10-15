@@ -48,6 +48,7 @@ def main():
     (data, catagories) = loadData(DATA, IGNORE)
     ## add the words to the proper entries in the word.json file, you can
     ## take care of duplicates buy combining them into sets and then adding them
+    ## to the list
     for k in list(words.keys()):
         combined = set(words[k] + data[k])
         words[k] = list(combined)
