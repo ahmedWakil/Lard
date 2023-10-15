@@ -8,14 +8,25 @@ def getData(wordType: str):
 
     return words[wordType]
 
+# a random coin toss P has to be a number between 0 and 1, by default this is 0.5
+def coinToss(p: float = 0.5):
+    if random.random() < p:
+        return True
+    else:
+        return False
+
+def randomFromList(L: list):
+    index = random.randint(0, len(L) - 1)
+    return L[index]
+
 def Sentence():
     sentence =  f"{NounPhrase()} {VerbPhrase()}"
-    sentence[0] = sentence[0].upper()
+    ##sentence[0] = sentence[0].upper()
     return sentence
 
 # noun phrase in only optional for a verb phrase but mandetory for a prepositional phrase
 # so depending on the type you handle each case differently
-def NounPhrase(type: str):
+def NounPhrase(type: str = "verb"):
     return f"{Determinants()} {AdjecivePhrase()} {Noun()} {PrepositionalPhrase()}"
 
 def VerbPhrase():
@@ -23,56 +34,73 @@ def VerbPhrase():
 
 # optional can return an empty string
 def AdjecivePhrase():
-    return f"{AdverbialPhrase()} {Adjective()}"
+    result = ""
+    if coinToss():
+        result = f"{AdverbialPhrase()} {Adjective()}"
+    return result
 
 # optional can return an empty string
 def PrepositionalPhrase():
-    return f"{Preposition()} {NounPhrase()}"
+    result = ""
+    if coinToss():
+        result = f"{Preposition()} {NounPhrase()}"
+    return result
 
-# optional adverbial phrase is optional and sometimes returns an empty string
+# adverbial phrase is optional and sometimes returns an empty string
 def AdverbialPhrase():
-    return f"{ModifyingAdverb()} {Adverb()}"
+    result = ""
+    if coinToss():
+        result = f"{ModifyingAdverb()} {Adverb()}"
+    return result
 
 ## optional can return an empty string
 def Determinants():
-    determinants = getData("Determinants")
+    result = ""
+    if coinToss():
+        determinants = getData("Determinants")
+        result = randomFromList(determinants)
+    return result
 
 def Noun():
     nouns = getData("Nouns")
-    index = random.randint(0, len(nouns) - 1)
-    return nouns[index]
+    return randomFromList(nouns)
 
 # Auxiliary berbs are optional and can return an empty string
 def AuxiliaryVerb():
-    auxverbs = getData("AuxiliaryVerb")
+    result = ""
+    if coinToss():
+        auxverbs = getData("AuxiliaryVerb")
+        result = randomFromList(auxverbs)
+    return result
 
 def Verb():
     verbs = getData("Verb")
-    index = random.randint(0, len(verbs) - 1)
-    return verbs[index]
+    return randomFromList(verbs)
 
 def Adjective():
     adj = getData("Adjective")
-    index = random.randint(0, len(adj) - 1)
-    return adj[index]
+    return randomFromList(adj)
 
 def Preposition():
     preposition = getData("Preposition")
-    index = random.randint(0, len(preposition) - 1)
-    return preposition[index]
+    return randomFromList(preposition)
 
 ## modifuing adverbs are sometimes optional and can return an empty string
 def ModifyingAdverb():
-    modifyingAdverb = getData("ModifyingAdverb")
+    result = ""
+    if coinToss():
+        modifyingAdverb = getData("ModifyingAdverb")
+        result = randomFromList(modifyingAdverb)
+    
+    return result
 
 def Adverb():
     adverb = getData("Adverb")
-    index = random.randint(0, len(adverb) - 1)
-    return adverb[index]
+    return randomFromList(adverb)
 
 def main():
     ## here we will be generating the sentences
-    print(Noun())
+    print(Sentence())
 
 if __name__ == "__main__":
     main()
