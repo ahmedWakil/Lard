@@ -49,7 +49,7 @@ def main():
     ## add the words to the proper entries in the word.json file, you can
     ## take care of duplicates buy combining them into sets and then adding them
     ## to the list
-    for k in list(words.keys()):
+    for k in list(catagories):
         combined = set(words[k] + data[k])
         words[k] = list(combined)
     ## write the word.json file
