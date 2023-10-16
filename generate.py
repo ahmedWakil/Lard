@@ -24,13 +24,21 @@ def Sentence():
     ##sentence[0] = sentence[0].upper()
     return sentence
 
-# noun phrase in only optional for a verb phrase but mandetory for a prepositional phrase
-# so depending on the type you handle each case differently
-def NounPhrase(type: str = "verb"):
-    return f"{Determinants()} {AdjecivePhrase()} {Noun()} {PrepositionalPhrase()}"
+# noun phrase in only optional for a verb phrase but mandetory for a prepositional phrase 
+# or a full sentence so depending on the type you handle each case differently
+def NounPhrase(type: str = "prep"):
+    result = ""
+
+    if (type == "verb"):
+        if (not coinToss()):
+            result = f"{Determinants()} {AdjecivePhrase()} {Noun()} {PrepositionalPhrase()}"
+    else:
+        result = f"{Determinants()} {AdjecivePhrase()} {Noun()} {PrepositionalPhrase()}"
+    
+    return result
 
 def VerbPhrase():
-    return f"{AuxiliaryVerb()} {Verb()} {NounPhrase()} {PrepositionalPhrase()} {AdverbialPhrase()}"
+    return f"{AuxiliaryVerb()} {Verb()} {NounPhrase('verb')} {PrepositionalPhrase()} {AdverbialPhrase()}"
 
 # optional can return an empty string
 def AdjecivePhrase():
@@ -43,7 +51,7 @@ def AdjecivePhrase():
 def PrepositionalPhrase():
     result = ""
     if coinToss():
-        result = f"{Preposition()} {NounPhrase()}"
+        result = f"{Preposition()} {NounPhrase('prep')}"
     return result
 
 # adverbial phrase is optional and sometimes returns an empty string

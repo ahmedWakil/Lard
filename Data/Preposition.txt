@@ -6,7 +6,7 @@ to
 by
 with
 since
-foe
+for
 from
 until
 towards
