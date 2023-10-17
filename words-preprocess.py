@@ -5,7 +5,7 @@ import json
 
 ## Takes in a file name or a url to the file and then adds them to the
 ## words data file to be used in the generation
-IGNORE = {'\r', '\n'}
+IGNORE = {'\r', '\n', ' '}
 DATA = "Data/*.txt"
 WORDS_PATH = "Data/words.json"
 
@@ -20,7 +20,7 @@ def readLines(filepath, ignore: set = {}):
         for line in f:
             for i in ignore:
                 line = line.replace(i, '')
-            lines.append(line)
+            lines.append(line.lower())
 
     return lines
 

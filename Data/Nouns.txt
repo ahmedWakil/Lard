@@ -22,8 +22,6 @@ wheel
 wheels
 leg
 legs
-letetuce
-letetuces
 cat
 cats
 pleasure
